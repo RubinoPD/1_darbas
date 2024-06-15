@@ -41,6 +41,9 @@ public class HibernateApp {
 
             Person person = new Person(1, "John Doe", 30, 5.9f, true, 'J', animals);
 
+            System.out.println("Marshalling Person object to XML and printing to console...");
+            JAXBUtility.marshalToConsole(person);
+
             // Marshalling: Convert Java object to XML
             File file = new File("person.xml");
             JAXBUtility.marshal(person, file);

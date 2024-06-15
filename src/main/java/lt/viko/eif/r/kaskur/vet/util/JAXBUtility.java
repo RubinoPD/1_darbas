@@ -37,4 +37,11 @@ public class JAXBUtility {
         Unmarshaller unmarshaller = context.createUnmarshaller();
         return clazz.cast(unmarshaller.unmarshal(file));
     }
+
+    public static void marshalToConsole(Object object) throws JAXBException {
+        JAXBContext context = JAXBContext.newInstance(object.getClass());
+        Marshaller marshaller = context.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        marshaller.marshal(object, System.out);
+    }
 }
