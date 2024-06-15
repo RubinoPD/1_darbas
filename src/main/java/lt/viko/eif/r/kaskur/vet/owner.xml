@@ -40,6 +40,5 @@
                 <specialization>Avian Specialist</specialization>
             </vet>
         </animal>
-        <!-- Add more animals with their respective vets -->
     </animals>
 </owner>

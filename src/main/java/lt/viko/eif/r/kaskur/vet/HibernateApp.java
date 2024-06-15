@@ -25,7 +25,7 @@ public class HibernateApp {
 
         try {
             // Create JAXB context and instantiate marshaller
-            JAXBContext context = JAXBContext.newInstance(Owner.class);
+            JAXBContext context = JAXBContext.newInstance(Owner.class, Animal.class, Vet.class);
 
             // Unmarshalling: Convert XML to Java object
             Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -79,11 +79,11 @@ public class HibernateApp {
     private static void printOwnerDetails(Owner owner) {
         System.out.println("Owner: " + owner.getName() + " " + owner.getLastname());
         System.out.println("Animals:");
-        for (Animal animals : owner.getAnimals()) {
-            System.out.println("  Animal: " + animals);
-            System.out.println("    Type: " + animals.getType());
-            System.out.println("    Gender: " + animals.getGender());
-            Vet vet = animals.getVet();
+        for (Animal animal : owner.getAnimals()) {
+            System.out.println("  Animal: " + animal.getName());
+            System.out.println("    Type: " + animal.getType());
+            System.out.println("    Gender: " + animal.getGender());
+            Vet vet = animal.getVet();
             if (vet != null) {
                 System.out.println("    Vet: " + vet.getName() + " " + vet.getLastname());
                 System.out.println("      Specialization: " + vet.getSpecialization());
