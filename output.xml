@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<owner>
+    <id>1</id>
+    <name>John</name>
+    <lastname>Doe</lastname>
+    <animals>
+        <id>1</id>
+        <name>Rex</name>
+        <gender>Male</gender>
+        <type>Dog</type>
+    </animals>
+    <animals>
+        <id>2</id>
+        <name>Mittens</name>
+        <gender>Female</gender>
+        <type>Cat</type>
+    </animals>
+    <animals>
+        <id>3</id>
+        <name>Polly</name>
+        <gender>Female</gender>
+        <type>Parrot</type>
+    </animals>
+</owner>

@@ -1,0 +1,25 @@
+<owner>
+    <id>1</id>
+    <name>John</name>
+    <lastname>Doe</lastname>
+    <animals>
+        <animal>
+            <id>1</id>
+            <name>Rex</name>
+            <gender>Male</gender>
+            <type>Dog</type>
+        </animal>
+        <animal>
+            <id>2</id>
+            <name>Mittens</name>
+            <gender>Female</gender>
+            <type>Cat</type>
+        </animal>
+        <animal>
+            <id>3</id>
+            <name>Polly</name>
+            <gender>Female</gender>
+            <type>Parrot</type>
+        </animal>
+    </animals>
+</owner>
