@@ -5,22 +5,24 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "animal")
-@XmlType(propOrder = {"id", "name", "gender", "type"})
+@XmlType(propOrder = {"id", "name", "gender", "type", "vet"})
 public class Animal {
 
     private int id;
     private String name;
     private String gender;
     private String type;
+    private Vet vet;
 
     // Default constructor
     public Animal() {}
 
-    public Animal(int id, String name, String gender, String type) {
+    public Animal(int id, String name, String gender, String type, Vet vet) {
         this.id = id;
         this.name = name;
         this.gender = gender;
         this.type = type;
+        this.vet = vet;
     }
 
     @XmlElement
@@ -57,6 +59,15 @@ public class Animal {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    @XmlElement
+    public Vet getVet() {
+        return vet;
+    }
+
+    public void setVet(Vet vet) {
+        this.vet = vet;
     }
 
     public String toString() {

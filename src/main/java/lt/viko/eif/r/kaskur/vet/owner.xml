@@ -9,18 +9,37 @@
             <name>Rex</name>
             <gender>Male</gender>
             <type>Dog</type>
+            <vet>
+                <id>101</id>
+                <name>Jane</name>
+                <lastname>Smith</lastname>
+                <specialization>Exotic Animals</specialization>
+            </vet>
         </animal>
         <animal>
             <id>2</id>
             <name>Mittens</name>
             <gender>Female</gender>
             <type>Cat</type>
+            <vet>
+                <id>102</id>
+                <name>Emma</name>
+                <lastname>Jones</lastname>
+                <specialization>Feline Specialist</specialization>
+            </vet>
         </animal>
         <animal>
             <id>3</id>
             <name>Polly</name>
             <gender>Female</gender>
             <type>Parrot</type>
+            <vet>
+                <id>103</id>
+                <name>Tom</name>
+                <lastname>Brown</lastname>
+                <specialization>Avian Specialist</specialization>
+            </vet>
         </animal>
+        <!-- Add more animals with their respective vets -->
     </animals>
 </owner>

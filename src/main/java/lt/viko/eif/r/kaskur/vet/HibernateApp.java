@@ -2,6 +2,7 @@ package lt.viko.eif.r.kaskur.vet;
 
 import lt.viko.eif.r.kaskur.vet.model.Animal;
 import lt.viko.eif.r.kaskur.vet.model.Owner;
+import lt.viko.eif.r.kaskur.vet.model.Vet;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
@@ -22,15 +23,6 @@ public class HibernateApp {
         Socket socket = null;
         BufferedReader in = null;
 
-        // Create sample Owner object with animals
-        List<Animal> animals = new ArrayList<>();
-        animals.add(new Animal(1, "Rex", "Male", "Dog"));
-        animals.add(new Animal(2, "Mittens", "Female", "Cat"));
-        animals.add(new Animal(3, "Polly", "Female", "Parrot"));
-
-
-        Owner newOwner = new Owner(1, "John", "Doe", animals);
-
         try {
             // Create JAXB context and instantiate marshaller
             JAXBContext context = JAXBContext.newInstance(Owner.class);
@@ -38,12 +30,15 @@ public class HibernateApp {
             // Unmarshalling: Convert XML to Java object
             Unmarshaller unmarshaller = context.createUnmarshaller();
             Owner owner = (Owner) unmarshaller.unmarshal(new File("C:\\Users\\Robertas\\Desktop\\saitynas\\Pirmas darbas\\animals\\src\\main\\java\\lt\\viko\\eif\\r\\kaskur\\vet\\owner.xml"));
-            System.out.println("Owner: " + owner.getName() + " " + owner.getLastname());
+            printOwnerDetails(owner);
 
-            // Print animals
-            for (Animal animal : owner.getAnimals()) {
-                System.out.println("\tAnimal: " + animals);
-            }
+            // Create sample Owner object with animals and their vets
+            List<Animal> animals = new ArrayList<>();
+            animals.add(new Animal(1, "Rex", "Male", "Dog", new Vet(101, "Jane", "Smith", "Exotic Animals")));
+            animals.add(new Animal(2, "Mittens", "Female", "Cat", new Vet(102, "Emma", "Jones", "Feline Specialist")));
+            animals.add(new Animal(3, "Polly", "Female", "Parrot", new Vet(103, "Tom", "Brown", "Avian Specialist")));
+
+            Owner newOwner = new Owner(1, "John", "Doe", animals);
 
             // Marshalling: Convert Java object to XML
             Marshaller marshaller = context.createMarshaller();
@@ -78,6 +73,20 @@ public class HibernateApp {
                 if (socket != null) socket.close();
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+    private static void printOwnerDetails(Owner owner) {
+        System.out.println("Owner: " + owner.getName() + " " + owner.getLastname());
+        System.out.println("Animals:");
+        for (Animal animals : owner.getAnimals()) {
+            System.out.println("  Animal: " + animals);
+            System.out.println("    Type: " + animals.getType());
+            System.out.println("    Gender: " + animals.getGender());
+            Vet vet = animals.getVet();
+            if (vet != null) {
+                System.out.println("    Vet: " + vet.getName() + " " + vet.getLastname());
+                System.out.println("      Specialization: " + vet.getSpecialization());
             }
         }
     }

@@ -17,6 +17,16 @@
                                         <xs:element name="name" type="xs:string"/>
                                         <xs:element name="gender" type="xs:string"/>
                                         <xs:element name="type" type="xs:string"/>
+                                        <xs:element name="vet">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="id" type="xs:int"/>
+                                                    <xs:element name="name" type="xs:string"/>
+                                                    <xs:element name="lastname" type="xs:string"/>
+                                                    <xs:element name="specialization" type="xs:string"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
