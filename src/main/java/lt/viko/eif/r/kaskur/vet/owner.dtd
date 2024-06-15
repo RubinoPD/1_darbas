@@ -1,0 +1,9 @@
+<!ELEMENT owner (id, name, lastname, animals)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT lastname (#PCDATA)>
+<!ELEMENT animals (animal+)>
+<!ELEMENT animal (id, name, gender, type)>
+<!ELEMENT gender (#PCDATA)>
+<!ELEMENT type (#PCDATA)>
+
