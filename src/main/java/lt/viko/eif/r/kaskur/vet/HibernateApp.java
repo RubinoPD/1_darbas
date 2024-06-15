@@ -46,16 +46,16 @@ public class HibernateApp {
             JAXBUtility.marshal(person, file);
             System.out.println("Marshalling complete. Check person.xml");
 
-            // Unmarshalling: Convert XML to Java object
+            /*// Unmarshalling: Convert XML to Java object
             Person unmarshalledPerson = JAXBUtility.unmarshal(Person.class, file);
             System.out.println("Unmarshalling complete. Person details:");
-            printPersonDetails(unmarshalledPerson);
+            printPersonDetails(unmarshalledPerson);*/
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        /*try {
+        try {
             // Connect to the server
             socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
             System.out.println("Connected to the server.");
@@ -64,10 +64,16 @@ public class HibernateApp {
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
             // Read the XML file content from the server and print it
-            String line;
-            while ((line = in.readLine()) != null) {
-                System.out.println(line);
-            }
+                try {
+                    // Unmarshalling: Convert XML to Java object
+                    File file = new File("person.xml");
+                    Person unmarshalledPerson = JAXBUtility.unmarshal(Person.class, file);
+                    System.out.println("Unmarshalling complete. Person details:");
+                    printPersonDetails(unmarshalledPerson);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -78,23 +84,23 @@ public class HibernateApp {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }*/
+        }
     }
     private static void printPersonDetails(Person person) {
         System.out.println("Person: " + person.getName() + " (ID: " + person.getId() + ")");
-        System.out.println("Age: " + person.getAge());
-        System.out.println("Height: " + person.getHeight());
-        System.out.println("Married: " + person.isMarried());
-        System.out.println("Initial: " + person.getInitial());
-        System.out.println("Animals:");
+        System.out.println("\tAge: " + person.getAge());
+        System.out.println("\tHeight: " + person.getHeight());
+        System.out.println("\tMarried: " + person.isMarried());
+        System.out.println("\tInitial: " + person.getInitial());
+        System.out.println("\tAnimals:");
         for (Animal animal : person.getAnimals()) {
-            System.out.println("  Animal: " + animal.getName());
-            System.out.println("    Type: " + animal.getType());
-            System.out.println("    Gender: " + animal.getGender());
+            System.out.println("  \t\tAnimal: " + animal.getName());
+            System.out.println("    \t\tType: " + animal.getType());
+            System.out.println("    \t\tGender: " + animal.getGender());
             Vet vet = animal.getVet();
             if (vet != null) {
-                System.out.println("    Vet: " + vet.getName() + " " + vet.getLastname());
-                System.out.println("      Specialization: " + vet.getSpecialization());
+                System.out.println("    \t\t\tVet: " + vet.getName() + " " + vet.getLastname());
+                System.out.println("      \t\t\tSpecialization: " + vet.getSpecialization());
             }
         }
     }

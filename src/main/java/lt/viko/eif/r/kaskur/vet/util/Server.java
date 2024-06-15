@@ -26,7 +26,7 @@ public class Server {
             out = new PrintWriter(clientSocket.getOutputStream(), true);
 
             // Read the XML file and send its content to the client
-            File xmlFile = new File("C:\\Users\\Robertas\\Desktop\\saitynas\\Pirmas darbas\\animals\\src\\main\\java\\lt\\viko\\eif\\r\\kaskur\\vet\\owner.xml");
+            File xmlFile = new File("C:\\Users\\Robertas\\Desktop\\saitynas\\Pirmas darbas\\animals\\person.xml");
             BufferedReader reader = new BufferedReader(new FileReader(xmlFile));
             String line;
             while ((line = reader.readLine()) != null) {
