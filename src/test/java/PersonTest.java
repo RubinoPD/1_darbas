@@ -1,5 +1,3 @@
-package lt.viko.eif.r.kaskur.vet.tests;
-
 import lt.viko.eif.r.kaskur.vet.model.Person;
 import lt.viko.eif.r.kaskur.vet.model.Animal;
 import lt.viko.eif.r.kaskur.vet.model.Vet;
@@ -10,6 +8,9 @@ import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
+/**
+ * Unit test for the Person class.
+ */
 public class PersonTest {
 
     @Test

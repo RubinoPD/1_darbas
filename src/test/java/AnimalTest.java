@@ -1,14 +1,14 @@
-package lt.viko.eif.r.kaskur.vet.tests;
-
 import lt.viko.eif.r.kaskur.vet.model.Animal;
 import lt.viko.eif.r.kaskur.vet.model.Vet;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-
 import static org.junit.Assert.*;
 
+
+/**
+ * Unit test for the Animal class.
+ */
 public class AnimalTest {
 
     @Test

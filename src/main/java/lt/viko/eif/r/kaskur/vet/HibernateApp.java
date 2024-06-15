@@ -1,15 +1,9 @@
 package lt.viko.eif.r.kaskur.vet;
 
 import lt.viko.eif.r.kaskur.vet.model.Animal;
-import lt.viko.eif.r.kaskur.vet.model.Owner;
 import lt.viko.eif.r.kaskur.vet.model.Vet;
 import lt.viko.eif.r.kaskur.vet.model.Person;
 import lt.viko.eif.r.kaskur.vet.util.JAXBUtility;
-
-import jakarta.xml.bind.JAXBContext;
-import jakarta.xml.bind.JAXBException;
-import jakarta.xml.bind.Marshaller;
-import jakarta.xml.bind.Unmarshaller;
 
 import java.io.*;
 import java.net.Socket;
@@ -17,11 +11,19 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Main application class for demonstrating JAXB transformations.
+ */
 public class HibernateApp {
 
     private static final String SERVER_ADDRESS = "localhost";
     private static final int SERVER_PORT = 8080;
+
+    /**
+     * Main method to demonstrate JAXB marshalling and unmarshalling.
+     *
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
 
         Socket socket = null;
@@ -46,7 +48,7 @@ public class HibernateApp {
 
             // Marshalling: Convert Java object to XML
             File file = new File("person.xml");
-            JAXBUtility.marshal(person, file);
+            JAXBUtility.transformToXML(person, file);
             System.out.println("Marshalling complete. Check person.xml");
 
             /*// Unmarshalling: Convert XML to Java object
@@ -70,7 +72,7 @@ public class HibernateApp {
                 try {
                     // Unmarshalling: Convert XML to Java object
                     File file = new File("person.xml");
-                    Person unmarshalledPerson = JAXBUtility.unmarshal(Person.class, file);
+                    Person unmarshalledPerson = JAXBUtility.transformToPOJO(Person.class, file);
                     System.out.println("Unmarshalling complete. Person details:");
                     printPersonDetails(unmarshalledPerson);
                 } catch (Exception e) {
@@ -89,6 +91,12 @@ public class HibernateApp {
             }
         }
     }
+
+    /**
+     * Prints the details of the Person object.
+     *
+     * @param person the Person object whose details are to be printed
+     */
     private static void printPersonDetails(Person person) {
         System.out.println("Person: " + person.getName() + " (ID: " + person.getId() + ")");
         System.out.println("\tAge: " + person.getAge());

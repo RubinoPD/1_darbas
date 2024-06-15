@@ -4,6 +4,9 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlType;
 
+/**
+ * Represents a Vet with various attributes.
+ */
 @XmlRootElement(name = "vet")
 @XmlType(propOrder = {"id", "name", "lastname", "specialization"})
 public class Vet {
@@ -13,9 +16,19 @@ public class Vet {
     private String lastname;
     private String specialization;
 
-    // Default constructor
+    /**
+     * Default constructor.
+     */
     public Vet() {}
 
+    /**
+     * Parameterized constructor.
+     *
+     * @param id             the ID of the vet
+     * @param name           the name of the vet
+     * @param lastname       the lastname of the vet
+     * @param specialization the specialization of the vet
+     */
     public Vet(int id, String name, String lastname, String specialization) {
         this.id = id;
         this.name = name;

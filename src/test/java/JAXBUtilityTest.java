@@ -1,5 +1,3 @@
-package lt.viko.eif.r.kaskur.vet.tests;
-
 import lt.viko.eif.r.kaskur.vet.model.Animal;
 import lt.viko.eif.r.kaskur.vet.model.Person;
 import lt.viko.eif.r.kaskur.vet.model.Vet;
@@ -11,6 +9,9 @@ import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
+/**
+ * Unit test for the JAXBUtility class.
+ */
 public class JAXBUtilityTest {
 
     @Test
@@ -26,11 +27,11 @@ public class JAXBUtilityTest {
         File file = new File("test_person.xml");
 
         // Test marshalling
-        JAXBUtility.marshal(person, file);
+        JAXBUtility.transformToXML(person, file);
         assertTrue(file.exists());
 
         // Test unmarshalling
-        Person unmarshalledPerson = JAXBUtility.unmarshal(Person.class, file);
+        Person unmarshalledPerson = JAXBUtility.transformToPOJO(Person.class, file);
         assertNotNull(unmarshalledPerson);
         assertEquals(person.getId(), unmarshalledPerson.getId());
         assertEquals(person.getName(), unmarshalledPerson.getName());
