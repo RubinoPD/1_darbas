@@ -3,10 +3,14 @@ package lt.viko.eif.r.kaskur.vet;
 import lt.viko.eif.r.kaskur.vet.model.Animal;
 import lt.viko.eif.r.kaskur.vet.model.Owner;
 import lt.viko.eif.r.kaskur.vet.model.Vet;
+import lt.viko.eif.r.kaskur.vet.model.Person;
+import lt.viko.eif.r.kaskur.vet.util.JAXBUtility;
+
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
+
 import java.io.*;
 import java.net.Socket;
 import java.io.File;
@@ -24,34 +28,34 @@ public class HibernateApp {
         BufferedReader in = null;
 
         try {
-            // Create JAXB context and instantiate marshaller
-            JAXBContext context = JAXBContext.newInstance(Owner.class, Animal.class, Vet.class);
+            // Creating a sample Person object with Animals and Vets
+            Vet vet1 = new Vet(101, "Jane", "Smith", "Exotic Animals");
+            Vet vet2 = new Vet(102, "Emma", "Jones", "Feline Specialist");
 
-            // Unmarshalling: Convert XML to Java object
-            Unmarshaller unmarshaller = context.createUnmarshaller();
-            Owner owner = (Owner) unmarshaller.unmarshal(new File("C:\\Users\\Robertas\\Desktop\\saitynas\\Pirmas darbas\\animals\\src\\main\\java\\lt\\viko\\eif\\r\\kaskur\\vet\\owner.xml"));
-            printOwnerDetails(owner);
+            Animal animal1 = new Animal(1, "Rex", "Male", "Dog", vet1);
+            Animal animal2 = new Animal(2, "Mittens", "Female", "Cat", vet2);
 
-            // Create sample Owner object with animals and their vets
             List<Animal> animals = new ArrayList<>();
-            animals.add(new Animal(1, "Rex", "Male", "Dog", new Vet(101, "Jane", "Smith", "Exotic Animals")));
-            animals.add(new Animal(2, "Mittens", "Female", "Cat", new Vet(102, "Emma", "Jones", "Feline Specialist")));
-            animals.add(new Animal(3, "Polly", "Female", "Parrot", new Vet(103, "Tom", "Brown", "Avian Specialist")));
+            animals.add(animal1);
+            animals.add(animal2);
 
-            Owner newOwner = new Owner(1, "John", "Doe", animals);
+            Person person = new Person(1, "John Doe", 30, 5.9f, true, 'J', animals);
 
             // Marshalling: Convert Java object to XML
-            Marshaller marshaller = context.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            marshaller.marshal(newOwner, new File("output.xml"));
+            File file = new File("person.xml");
+            JAXBUtility.marshal(person, file);
+            System.out.println("Marshalling complete. Check person.xml");
 
-            System.out.println("Marshaling complete. Check output.xml");
+            // Unmarshalling: Convert XML to Java object
+            Person unmarshalledPerson = JAXBUtility.unmarshal(Person.class, file);
+            System.out.println("Unmarshalling complete. Person details:");
+            printPersonDetails(unmarshalledPerson);
 
-        } catch (JAXBException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        try {
+        /*try {
             // Connect to the server
             socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
             System.out.println("Connected to the server.");
@@ -74,12 +78,16 @@ public class HibernateApp {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
     }
-    private static void printOwnerDetails(Owner owner) {
-        System.out.println("Owner: " + owner.getName() + " " + owner.getLastname());
+    private static void printPersonDetails(Person person) {
+        System.out.println("Person: " + person.getName() + " (ID: " + person.getId() + ")");
+        System.out.println("Age: " + person.getAge());
+        System.out.println("Height: " + person.getHeight());
+        System.out.println("Married: " + person.isMarried());
+        System.out.println("Initial: " + person.getInitial());
         System.out.println("Animals:");
-        for (Animal animal : owner.getAnimals()) {
+        for (Animal animal : person.getAnimals()) {
             System.out.println("  Animal: " + animal.getName());
             System.out.println("    Type: " + animal.getType());
             System.out.println("    Gender: " + animal.getGender());
